@@ -6,45 +6,44 @@ export default class NavbarComponent extends HTMLElement {
 
     connectedCallback() {
         this.shadowRoot.innerHTML = `
-          <style>
-                nav {
-                    background-color: #333;
-                    color: #fff;
-                    padding: 16px;
-                    position: sticky;
-                    top: 0;
-                    z-index: 1;
-                }
+            <style>
+                    nav {
+                        background-color: #333;
+                        color: #fff;
+                        padding: 16px;
+                        position: sticky;
+                        top: 0;
+                        z-index: 1;
+                    }
 
-                ul {
-                    list-style-type: none;
-                    margin: 0;
-                    padding: 0;
-                }
+                    ul {
+                        list-style-type: none;
+                        margin: 0;
+                        padding: 0;
+                    }
 
-                li {
-                    display: inline-block;
-                    margin-right: 20px;
-                }
+                    li {
+                        display: inline-block;
+                        margin-right: 20px;
+                    }
 
-                a {
-                    color: #fff;
-                    text-decoration: none;
-                }
+                    a {
+                        color: #fff;
+                        text-decoration: none;
+                    }
 
-                .active {
-                    font-weight: bold;
-                    color: yellow;
-                }
-          </style>
-          <nav>
-              <ul>
-                  <li><a href="/index.html">Inicio</a></li>
-                  <li><a href="/catalog.html">Catálogo</a></li>
-                  <li><a href="/product.html">Producto</a></li>
-                  <li><a href="/contact.html">Contacto</a></li>
-              </ul>
-          </nav>
+                    .active {
+                        font-weight: bold;
+                        color: yellow;
+                    }
+            </style>
+            <nav>
+                <ul>
+                    <li><a href="/index.html">Inicio</a></li>
+                    <li><a href="/catalog.html">Catálogo</a></li>
+                    <li><a href="/contact.html">Contacto</a></li>
+                </ul>
+            </nav>
       `;
 
         const currentPath = window.location.pathname;
