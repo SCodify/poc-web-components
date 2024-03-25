@@ -7,52 +7,120 @@ export default class NavbarComponent extends HTMLElement {
     connectedCallback() {
         this.shadowRoot.innerHTML = `
             <style>
-                    nav {
+                .navbar {
+                    display: flex;
+                    height: 27px;
+                    justify-content: end;
+                    align-items: center;
+                    background-color: #333;
+                    padding: 15px 30px;
+
+                }
+                
+                .menu {
+                    list-style: none;
+                    margin: 0;
+                    padding: 0;
+                    display: flex;
+                    z-index: 1;
+                }
+                
+                .menu li {
+                    display: inline;
+                }
+                
+                .menu li a {
+                    display: block;
+                    color: white;
+                    text-decoration: none;
+                    padding: 20px;
+                }
+                
+                .hamburger-menu {
+                    display: none;
+                    flex-direction: column;
+                    cursor: pointer;
+                }
+
+                .active {
+                    font-weight: bold;
+                    color: yellow !important    ;
+                }
+                
+                .hamburger-menu {
+                    display: none;
+                    flex-direction: column;
+                    cursor: pointer;
+                }
+                    
+                .bar {
+                    width: 25px;
+                    height: 3px;
+                    background-color: white;
+                    margin: 3px 0;
+                }
+
+                @media screen and (max-width: 768px) {
+                    .menu {
+                        flex-direction: column;
                         background-color: #333;
-                        color: #fff;
-                        padding: 16px;
-                        position: sticky;
-                        top: 0;
-                        z-index: 1;
+                        position: absolute;
+                        top: 60px;
+                        left: 0;
+                        width: 100%;
+                        overflow: hidden;
+                        height: 0px;
+                        transition: all 0.2s ease-out;
                     }
 
-                    ul {
-                        list-style-type: none;
-                        margin: 0;
-                        padding: 0;
+                    .menu li a {
+                        text-align: end;
                     }
-
-                    li {
-                        display: inline-block;
-                        margin-right: 20px;
+                  
+                    .menu.show {
+                        height: 174px;
                     }
-
-                    a {
-                        color: #fff;
-                        text-decoration: none;
+                  
+                    .hamburger-menu {
+                        display: flex;
                     }
-
-                    .active {
-                        font-weight: bold;
-                        color: yellow;
-                    }
+                }
             </style>
-            <nav>
-                <ul>
+            <nav class="navbar">
+                <ul class="menu">
                     <li><a href="/index.html">Inicio</a></li>
                     <li><a href="/catalog.html">Catálogo</a></li>
                     <li><a href="/contact.html">Contacto</a></li>
                 </ul>
+                <div class="hamburger-menu">
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                </div>
             </nav>
       `;
 
         const currentPath = window.location.pathname;
 
-        const links = this.shadowRoot.querySelectorAll('a');
+        const links = this.shadowRoot.querySelectorAll('.menu li a');
         
         links.forEach(link => {
             if (link.getAttribute('href') === currentPath) {
                 link.classList.add('active');
+            }
+        });
+
+        const hamburgerMenu = this.shadowRoot.querySelector('.hamburger-menu');
+        
+        const menu = this.shadowRoot.querySelector('.menu');
+
+        hamburgerMenu.addEventListener('click', () => {
+            menu.classList.toggle('show');
+        });
+
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768) {
+                menu.classList.remove('show');
             }
         });
     }
