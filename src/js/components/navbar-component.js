@@ -8,13 +8,15 @@ export default class NavbarComponent extends HTMLElement {
         this.shadowRoot.innerHTML = `
             <style>
                 .navbar {
+                    position: sticky;
+                    top: 0;
                     display: flex;
                     height: 27px;
                     justify-content: end;
                     align-items: center;
                     background-color: #333;
                     padding: 15px 30px;
-
+                    z-index: 2;
                 }
                 
                 .menu {
@@ -47,12 +49,6 @@ export default class NavbarComponent extends HTMLElement {
                     color: yellow !important    ;
                 }
                 
-                .hamburger-menu {
-                    display: none;
-                    flex-direction: column;
-                    cursor: pointer;
-                }
-                    
                 .bar {
                     width: 25px;
                     height: 3px;
