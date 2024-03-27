@@ -86,7 +86,7 @@ export default class NavbarComponent extends HTMLElement {
                     }
 
                     .layer {
-                        position: absolute;
+                        position: fixed;
                         display: none;
                         top: 0;
                         background-color: rgba(0, 0, 0, 0);
@@ -120,7 +120,7 @@ export default class NavbarComponent extends HTMLElement {
         const currentPath = window.location.pathname;
 
         const links = this.shadowRoot.querySelectorAll('.menu li a');
-        
+
         links.forEach(link => {
             if (link.getAttribute('href') === currentPath) {
                 link.classList.add('active');
@@ -128,22 +128,29 @@ export default class NavbarComponent extends HTMLElement {
         });
 
         const hamburgerMenu = this.shadowRoot.querySelector('.hamburger-menu');
-        
+
         const menu = this.shadowRoot.querySelector('.menu');
 
         hamburgerMenu.addEventListener('click', () => {
             menu.classList.toggle('show');
-            
-            if( layer.classList.contains('show')){
+
+            if (layer.classList.contains('show')) {
                 layer.classList.remove('show');
             } else {
                 layer.classList.add('show');
+            }
+
+            if (menu.classList.contains('show')) {
+                document.body.classList.add('bodyScroll');
+            } else {
+                document.body.classList.remove('bodyScroll');
             }
         });
 
         window.addEventListener('resize', () => {
             if (window.innerWidth > 768) {
                 menu.classList.remove('show');
+                document.body.classList.remove('bodyScroll');
             }
         });
 
