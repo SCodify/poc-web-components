@@ -12,13 +12,17 @@ export default class NavbarComponent extends HTMLElement {
                     top: 0;
                     display: flex;
                     height: 27px;
-                    justify-content: end;
+                    justify-content: space-between;
                     align-items: center;
                     background-color: #333;
                     padding: 15px 30px;
                     z-index: 2;
                 }
                 
+                .logo {
+                    color: white;
+                }
+
                 .menu {
                     list-style: none;
                     margin: 0;
@@ -80,9 +84,25 @@ export default class NavbarComponent extends HTMLElement {
                     .hamburger-menu {
                         display: flex;
                     }
+
+                    .layer {
+                        position: absolute;
+                        display: none;
+                        top: 0;
+                        background-color: rgba(0, 0, 0, 0);
+                        backdrop-filter: blur(2px);
+                        width: 100%;
+                        height: 100dvh;
+                        z-index: 1;
+                    }
+                    
+                    .layer.show {
+                        display: flex;
+                    }
                 }
             </style>
             <nav class="navbar">
+                <span class="logo">LOGO</span>
                 <ul class="menu">
                     <li><a href="/index.html">Inicio</a></li>
                     <li><a href="/catalog.html">Catálogo</a></li>
@@ -94,6 +114,7 @@ export default class NavbarComponent extends HTMLElement {
                     <div class="bar"></div>
                 </div>
             </nav>
+            <div class="layer"></div>
       `;
 
         const currentPath = window.location.pathname;
@@ -112,12 +133,25 @@ export default class NavbarComponent extends HTMLElement {
 
         hamburgerMenu.addEventListener('click', () => {
             menu.classList.toggle('show');
+            
+            if( layer.classList.contains('show')){
+                layer.classList.remove('show');
+            } else {
+                layer.classList.add('show');
+            }
         });
 
         window.addEventListener('resize', () => {
             if (window.innerWidth > 768) {
                 menu.classList.remove('show');
             }
+        });
+
+        const layer = this.shadowRoot.querySelector('.layer');
+
+        layer.addEventListener('click', () => {
+            layer.classList.remove('show');
+            menu.classList.remove('show');
         });
     }
 }
