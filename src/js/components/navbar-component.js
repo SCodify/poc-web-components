@@ -5,6 +5,18 @@ export default class NavbarComponent extends HTMLElement {
     }
 
     connectedCallback() {
+        const menuItems = [
+            {path:'/index.html', text:"Inicio"},
+            {path:'/catalog.html', text:"Catálogo"},
+            {path:'/contact.html', text:"Contacto"}
+        ]
+
+        let menuList = "";
+
+        menuItems.forEach(item => {
+            menuList += `<li><a href="${item.path}" >${item.text}</a></li>`
+        })
+
         this.shadowRoot.innerHTML = `
             <style>
                 .navbar {
@@ -78,7 +90,7 @@ export default class NavbarComponent extends HTMLElement {
                     }
                   
                     .menu.show {
-                        height: 174px;
+                        height: ${menuItems.length * 58}px;
                     }
                   
                     .hamburger-menu {
@@ -104,9 +116,7 @@ export default class NavbarComponent extends HTMLElement {
             <nav class="navbar">
                 <span class="logo">LOGO</span>
                 <ul class="menu">
-                    <li><a href="/index.html">Inicio</a></li>
-                    <li><a href="/catalog.html">Catálogo</a></li>
-                    <li><a href="/contact.html">Contacto</a></li>
+                    ${menuList}
                 </ul>
                 <div class="hamburger-menu">
                     <div class="bar"></div>
