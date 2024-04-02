@@ -7,6 +7,7 @@ export default class NavbarComponent extends HTMLElement {
     connectedCallback() {
         const menuItems = [
             {path:'/index.html', text:"Inicio"},
+            {path:'/about.html', text:"Quienes Somos"},
             {path:'/catalog.html', text:"Catálogo"},
             {path:'/contact.html', text:"Contacto"}
         ]
@@ -169,6 +170,7 @@ export default class NavbarComponent extends HTMLElement {
         layer.addEventListener('click', () => {
             layer.classList.remove('show');
             menu.classList.remove('show');
+            document.body.classList.remove('bodyScroll');
         });
     }
 }
