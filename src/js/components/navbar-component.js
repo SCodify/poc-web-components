@@ -160,6 +160,7 @@ export default class NavbarComponent extends HTMLElement {
 
         window.addEventListener('resize', () => {
             if (window.innerWidth > 768) {
+                layer.classList.remove('show');
                 menu.classList.remove('show');
                 document.body.classList.remove('bodyScroll');
             }
